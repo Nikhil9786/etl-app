@@ -47,6 +47,8 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
        ```bash
        chmod +x query_database.sh
        ./query_database.sh
+
+       
    5. **Code Flow:**
       * ETL Process:
         (i). Load data from CSV files using the Pandas library.
