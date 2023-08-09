@@ -51,12 +51,12 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
   5. **How to Run and Test:**
      * Build and run the Docker container by executing the following command:
        ```bash
-       chmod +x run_etl.sh
+       chmod +x run_etl_container.sh
        ./run_etl_container.sh
        
      * Initiate the ETL process by sending an HTTP POST request to the API endpoint. Use the following command:
        ```bash
-       chmod +x run_etl.sh
+       chmod +x trigger_etl_services.sh
        ./trigger_etl_services.sh
      * After the ETL process completes, you can query the populated database for the derived features. Run the following command:
        ```bash
