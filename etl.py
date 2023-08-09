@@ -46,7 +46,7 @@ def main():
         user="user",
         password="userpass",
         host="localhost",
-        port="5432"
+        port="80"
     )
 
     # Upload processed data to PostgreSQL
