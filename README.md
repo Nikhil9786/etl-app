@@ -43,8 +43,24 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
        ```bash
        chmod +x run_etl.sh
        ./run_etl.sh
+     * After the ETL process completes, you can query the populated database for the derived features. Run the following command:
+       ```bash
+       chmod +x query_database.sh
+       ./query_database.sh
+   5. **Code Flow:**
+      * ETL Process:
+        (i). Load data from CSV files using the Pandas library.
+        (ii).Derive features such as total experiments, average experiments, and most commonly experimented compound.
+Use Pandas and SQLalchemy to upload the derived data to a PostgreSQL database table.
+Flask API:
 
+Create an API using the Flask framework.
+Define a custom route (/trigger_etl) to trigger the ETL process via an HTTP POST request.
+Dockerization:
 
+Dockerize the application to ensure consistent deployment across different environments.
+Utilize a Dockerfile to define the container environment and dependencies.
+Use the Docker CLI to build and run the Docker container.
 
 
 ### Data
