@@ -1,24 +1,51 @@
-# Backend Engineering Take-Home Challenge
+# ETL Pipeline with API
+This repository contains a simple ETL (Extract, Transform, Load) pipeline with an API trigger. The pipeline processes CSV files, derives features, and populates a PostgreSQL database table.
 
 ### Introduction
-In this challenge, you will be tasked with creating a simple ETL pipeline that can be triggered via an API call. You will be provided with a set of CSV files that you will need to process, derive some features from, and then upload into a database table.
+This project demonstrates the creation of a basic ETL pipeline using Python, Flask, Docker, and PostgreSQL. The primary objective is to extract data from CSV files, perform feature transformation, and load the processed data into a PostgreSQL database. The ETL process can be initiated via an API endpoint.
 
-### Requirements
+### Prerequisites
 - Python 3.7+
 - Docker
 - PostgreSQL
 
-### Challenge
-1.  Create a Dockerized application that can be started with a single `docker run` command.
+### Setup
 
-2. The application should expose an API endpoint that triggers an ETL process.
+1. **Clone the Repository:**
 
-3. The ETL process should:
-- Load CSV files from the given data directory.
- - Process these files to derive some simple features.
- - Upload the processed data into a **postgres** table.
+   ```bash
+   git clone https://github.com/yourusername/etl-api.git
+   cd etl-api
 
-4.  The application should be built using Python and any tooling you like for coordinating the workflow and fronting the api server
+2. **Install Dependencies:**
+
+   ```bash
+   pip install -r requirements.txt
+
+ 3. **Database Configuration:**
+    * Assuming PostgreSQL is installed, I created a database that will store the processed data using psql.
+    ``bash
+    CREATE DATABASE postgres_db;
+    * To securely interact with password, it is essential to create user password
+      ```bash
+      CREATE USER user WITH PASSWORD 'passuser';
+    * Granting appropriate permissions to user
+      ```bash
+      GRANT ALL PRIVILEGES ON DATABASE postgres_db TO user;
+
+  4. **How to Run:**
+     * Build and run the Docker container by executing the following command:
+       ```bash
+       chmod +x run_etl.sh
+       ./run_etl.sh
+       
+     * Initiate the ETL process by sending an HTTP POST request to the API endpoint. Use the following command:
+       ```bash
+       chmod +x run_etl.sh
+       ./run_etl.sh
+
+
+
 
 ### Data
 You will find three CSV files in the `data`  directory:
