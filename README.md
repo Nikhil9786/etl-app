@@ -35,7 +35,7 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
        ```bash
       GRANT ALL PRIVILEGES ON DATABASE postgres_db TO user;
        ```
-  4. 5. **Code Flow:**
+  4. **Code Flow:**
       * ETL Process:
         * Load data from CSV files using the Pandas library
         * Derive features such as total experiments, average experiments, and most commonly experimented compound.
