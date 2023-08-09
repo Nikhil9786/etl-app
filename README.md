@@ -24,17 +24,17 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
 
  3. **Database Configuration:**
     * Assuming PostgreSQL is installed, I created a database that will store the processed data using psql.
-    ```bash
-    CREATE DATABASE postgres_db;
-    ```
+       ```bash
+       CREATE DATABASE postgres_db;
+       ```
     * To securely interact with password, it is essential to create user password
-      ```bash
+       ```bash
       CREATE USER user WITH PASSWORD 'passuser';
-    ```
+       ```
     * Granting appropriate permissions to user
-      ```bash
+       ```bash
       GRANT ALL PRIVILEGES ON DATABASE postgres_db TO user;
-      ```
+       ```
   4. 5. **Code Flow:**
       * ETL Process:
         * Load data from CSV files using the Pandas library
