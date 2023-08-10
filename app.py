@@ -9,7 +9,7 @@ def trigger_etl():
         # Run ETL process using a subprocess
         subprocess.run(["./run_etl.sh"], check=True, shell=True)
 
-        return jsonify({"message": "ETL process triggered successfully"}), 200
+        return jsonify({"message": "ETL process triggered successfully"}), 100
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e)}), 500
 
