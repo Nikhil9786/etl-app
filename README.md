@@ -37,15 +37,23 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
        ```
   4. **Code Flow:**
       * ETL Process(etl.py):
-         * Data Extraction and Transformation:
-           * Load data from CSV files using the Pandas library
-           * Derive features such as total experiments, average experiments, and most commonly experimented compound.
-         * Data Loading
-           * Leveraged SQLAlchemy and the PostgreSQL driver to establish a connection with the database.
-           * Insert the derived features into appropriate database tables.
+         * Data Extraction from CSV files
+           * The pipeline ingests data from three CSV files: users.csv, user_experiments.csv, and compounds.csv.
+           * These files contain information about users, their experiments, and the compounds involved.
+         * Data Transformation:
+           * The data from user_experiments.csv is transformed to derive features.
+           * Features include:
+            * Total experiments conducted by each user.
+            * Average number of experiments per user.
+            * The most commonly experimented compound.
+         * Data Poupulation
+           * Transformed data is loaded into a PostgreSQL database.
+           * The average_experiments table stores user IDs and their average experiment counts.
+           * The most_common_compound table stores the ID of the most commonly experimented compound.
       * Flask API(app.py):
-        * Create an API using the Flask framework.
-        * Define a custom route (/trigger_etl) to trigger the ETL process via an HTTP POST request.
+        The Flask API serves as the command center for the ETL pipeline. It provides a mechanism to initiate the ETL process and showcases the integration of API technology with the ETL workflow.
+        * A custom API endpoint (/trigger_etl) is defined using the Flask framework.
+        * An HTTP POST request to this endpoint triggers the ETL process.
       * Dockerization:
         * Dockerize the application to ensure consistent deployment across different environments.
         * Utilize a Dockerfile to define the container environment and dependencies.
