@@ -84,3 +84,6 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
    * Logging and Monitoring:
       * Implement robust logging mechanisms to track the ETL pipeline's progress and identify potential issues.
       * Utilize monitoring tools to gain insights into the pipeline's health and performance.
+
+**NOTE**
+Make sure the path for data files, names of database and user credentials, and ports are changed accordingly
