@@ -51,6 +51,7 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
            * The average_experiments table stores user IDs and their average experiment counts.
            * The most_common_compound table stores the ID of the most commonly experimented compound.
       * Flask API(app.py):
+
         The Flask API serves as the command center for the ETL pipeline. It provides a mechanism to initiate the ETL process and showcases the integration of API technology with the ETL workflow.
         * A custom API endpoint (/trigger_etl) is defined using the Flask framework.
         * An HTTP POST request to this endpoint triggers the ETL process.
