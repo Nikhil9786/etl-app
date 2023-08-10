@@ -63,5 +63,15 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
        ./run_etl.sh
      * After the ETL process completes, you can query the populated database for the derived features. Run the following command:
        ```bash
-       chmod +x rquery_database.sh
+       chmod +x query_database.sh
        ./query_database.sh
+     * Created a shell script to run everything with one command:
+       ```bash
+       chmod +x run_app.sh
+       ./run_app.sh
+
+6. **Future Work**
+   * Automated Testing: Develop comprehensive unit tests and integration tests to verify the correctness of each component in the ETL pipeline.
+   * Logging and Monitoring:
+      * Implement robust logging mechanisms to track the ETL pipeline's progress and identify potential issues.
+      * Utilize monitoring tools to gain insights into the pipeline's health and performance.
