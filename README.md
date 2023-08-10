@@ -1,4 +1,4 @@
-# ETL Pipeline with API
+# ETL Pipeline with API Trigger
 This repository contains a simple ETL (Extract, Transform, Load) pipeline with an API trigger. The pipeline processes CSV files, derives features, and populates a PostgreSQL database table.
 
 ### Introduction
@@ -29,18 +29,21 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
        ```
     * To securely interact with password, it is essential to create user password
        ```bash
-      CREATE USER user WITH PASSWORD 'passuser';
+   CREATE USER user WITH PASSWORD 'passuser';
        ```
     * Granting appropriate permissions to user
        ```bash
       GRANT ALL PRIVILEGES ON DATABASE postgres_db TO user;
        ```
   4. **Code Flow:**
-      * ETL Process:
-        * Load data from CSV files using the Pandas library
-        * Derive features such as total experiments, average experiments, and most commonly experimented compound.
-        * Use Pandas and SQLalchemy to upload the derived data to a PostgreSQL database table.
-      * Flask API:
+      * ETL Process(etl.py):
+         * Data Extraction and Transformation:
+           * Load data from CSV files using the Pandas library
+           * Derive features such as total experiments, average experiments, and most commonly experimented compound.
+         * Data Loading
+           * Leveraged SQLAlchemy and the PostgreSQL driver to establish a connection with the database.
+           * Insert the derived features into appropriate database tables.
+      * Flask API(app.py):
         * Create an API using the Flask framework.
         * Define a custom route (/trigger_etl) to trigger the ETL process via an HTTP POST request.
       * Dockerization:
@@ -51,13 +54,14 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
   5. **How to Run and Test:**
      * Build and run the Docker container by executing the following command:
        ```bash
-       chmod +x run_etl_container.sh
-       ./run_etl_container.sh
+       chmod +x docker.sh
+       ./docker.sh
        
      * Initiate the ETL process by sending an HTTP POST request to the API endpoint. Use the following command:
        ```bash
-       chmod +x trigger_etl_services.sh
-       ./trigger_etl_services.sh
+       chmod +x run_etl.sh
+       ./run_etl.sh
      * After the ETL process completes, you can query the populated database for the derived features. Run the following command:
        ```bash
-       python query_database.py
+       chmod +x rquery_database.sh
+       ./query_database.sh
