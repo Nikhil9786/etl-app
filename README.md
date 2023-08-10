@@ -29,7 +29,7 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
        ```
     * To securely interact with password, it is essential to create user password
        ```bash
-   CREATE USER user WITH PASSWORD 'passuser';
+       CREATE USER user WITH PASSWORD 'passuser';
        ```
     * Granting appropriate permissions to user
        ```bash
