@@ -26,9 +26,9 @@ def upload_data_to_database(conn, data, table_name, columns):
 
 def main():
     # Load CSV files
-    users_df = pd.read_csv("/Users/ujain/Downloads/backend_takehome/data/users.csv")
-    user_experiments_df = pd.read_csv("/Users/ujain/Downloads/backend_takehome/data/user_experiments.csv")
-    compounds_df = pd.read_csv("/Users/ujain/Downloads/backend_takehome/data/compounds.csv")
+    users_df = pd.read_csv("../data/users.csv")
+    user_experiments_df = pd.read_csv("../data/user_experiments.csv")
+    compounds_df = pd.read_csv("../data/compounds.csv")
 
     # Derive features
     avg_experiments_per_user, most_common_compound_name = derive_features(user_experiments_df, compounds_df)
