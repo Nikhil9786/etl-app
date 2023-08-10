@@ -1,32 +1,25 @@
 import pandas as pd
 import psycopg2
 
-def derive_features(users_df, user_experiments_df, compounds_df):
-    # Derive features
+def derive_features(user_experiments_df, compounds_df):
     user_experiments_df['total_experiments'] = user_experiments_df['experiment_compound_ids'].apply(lambda x: len(x.split(';')))
     
     avg_experiments_per_user = user_experiments_df.groupby('user_id')['total_experiments'].mean().reset_index()
     avg_experiments_per_user.rename(columns={'total_experiments': 'average_experiments'}, inplace=True)
 
-    most_common_compound = user_experiments_df['experiment_compound_ids'].str.split(';').explode().value_counts().idxmax()
-    
-    return avg_experiments_per_user, most_common_compound
+    compound_counts = user_experiments_df['experiment_compound_ids'].str.split(';').explode().value_counts()
+    most_common_compound_id = compound_counts.index[0]
 
-def upload_to_database(df, conn):
+    most_common_compound_name = compounds_df.loc[compounds_df['compound_id'] == most_common_compound_id, 'compound_name'].values[0]
+    
+    return avg_experiments_per_user, most_common_compound_name
+
+def upload_data_to_database(conn, data, table_name, columns):
     cursor = conn.cursor()
 
-    # Upload average experiments per user
-    for index, row in df.iterrows():
-        cursor.execute(
-            "INSERT INTO average_experiments (user_id, average_experiments) VALUES (%s, %s)",
-            (row['user_id'], row['average_experiments'])
-        )
-
-    # Upload most common compound
-    cursor.execute(
-        "INSERT INTO most_common_compound (compound_id) VALUES (%s)",
-        (df['most_common_compound'],)
-    )
+    for index, row in data.iterrows():
+        values = ", ".join([f"'{row[col]}'" for col in columns])
+        cursor.execute(f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({values})")
 
     conn.commit()
     cursor.close()
@@ -38,7 +31,7 @@ def main():
     compounds_df = pd.read_csv("/Users/ujain/Downloads/backend_takehome/data/compounds.csv")
 
     # Derive features
-    avg_experiments_per_user, most_common_compound = derive_features(users_df, user_experiments_df, compounds_df)
+    avg_experiments_per_user, most_common_compound_name = derive_features(user_experiments_df, compounds_df)
 
     # Connect to PostgreSQL database
     conn = psycopg2.connect(
@@ -50,7 +43,8 @@ def main():
     )
 
     # Upload processed data to PostgreSQL
-    upload_to_database(avg_experiments_per_user, most_common_compound, conn)
+    upload_data_to_database(conn, avg_experiments_per_user, "average_experiments", ["user_id", "average_experiments"])
+    upload_data_to_database(conn, pd.DataFrame({"compound_name": [most_common_compound_name]}), "most_common_compound", ["compound_name"])
 
     # Close database connection
     conn.close()
