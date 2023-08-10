@@ -15,7 +15,7 @@ This project demonstrates the creation of a basic ETL pipeline using Python, Fla
 
    ```bash
    git clone https://github.com/Nikhil9786/etl-app.git
-   cd etl-api
+   cd etl-app
 
 2. **Install Dependencies:**
 
